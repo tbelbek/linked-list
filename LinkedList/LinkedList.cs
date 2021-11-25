@@ -32,20 +32,19 @@ namespace SLL
             }
         }
 
-        private int _length;
         private Node _head;
 
         /// <summary>
         /// Length of the list
         /// </summary>
-        internal int Length => _length;
+        internal int Length { get; private set; }
 
         /// <summary>
         /// Default Constructor
         /// </summary>
         internal LinkedList()
         {
-            _length = 0;
+            Length = 0;
             _head = null;
         }
 
@@ -55,7 +54,7 @@ namespace SLL
         internal void ShowNodes()
         {
             // Print all nodes till the end of the list.
-            Node current = _head;
+            var current = _head;
             if (current == null)
             {
                 Console.WriteLine("No more nodes to display.");
@@ -78,12 +77,12 @@ namespace SLL
         /// </summary>
         internal void ShowLength()
         {
-            string numString = "numbers";
-            if (_length == 1)
+            var numString = "numbers";
+            if (Length == 1)
             {
                 numString = "number";
             }
-            Console.WriteLine($"List has [{_length.ToString()}] {numString}.");
+            Console.WriteLine($"List has [{Length.ToString()}] {numString}.");
         }
 
         /// <summary>
@@ -95,8 +94,8 @@ namespace SLL
             Console.WriteLine();
             Console.WriteLine($"Add node [{d.ToString()}].");
             // Create a new Node instance with given data;
-            Node newNode = new Node(d);
-            Node current = _head;
+            var newNode = new Node(d);
+            var current = _head;
             if (_head == null)
             {
                 _head = newNode;
@@ -111,7 +110,7 @@ namespace SLL
                 // Add new node as the next node to the last node.
                 current.Next = newNode;
             }
-            _length++;
+            Length++;
             ShowNodes();
         }
 
@@ -124,7 +123,7 @@ namespace SLL
             Console.WriteLine();
             Console.WriteLine($"Delete node [{d.ToString()}].");
             // Find the node to be deleted. 
-            Node current = _head;
+            var current = _head;
 
             if (current != null)
             {
@@ -134,7 +133,7 @@ namespace SLL
                     // If first node is not the only node
                     current = current.Next ?? null;
                     _head = current;
-                    _length--;
+                    Length--;
                 }
                 else
                 {
@@ -147,7 +146,7 @@ namespace SLL
                         // Set the next pointer of the previous node to be the node next to the one that is being deleted.
                         current.Next = current.Next.Next;
                         // Delete the node
-                        _length--;
+                        Length--;
                     }
                     else
                     {
@@ -167,10 +166,10 @@ namespace SLL
         {
             Console.WriteLine();
             Console.WriteLine($"Find node [{d.ToString()}].");
-            Node current = _head;
+            var current = _head;
             if (current != null)
             {
-                int counter = 1;
+                var counter = 1;
                 while (current.Next != null && current.Data != d)
                 {
                     current = current.Next;
